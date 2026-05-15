@@ -1,10 +1,18 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Boolean, Column, DateTime, Integer, String, func
 from core.database import Base
 
 class User(Base):
     __tablename__ = "users"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True, nullable=False)
+    name = Column(String, nullable=False)
+    email = Column(String, unique=True, index=True, nullable=False)
+    hashed_password = Column(String, nullable=False)
 
-    id = Column("id", Integer, primary_key=True, index=True)
-    username = Column("username", String, unique=True, index=True)
-    email = Column("email", String, unique=True, index=True)
-    hashed_password = Column("hashed_password", String)
+    is_active = Column(Boolean, default=True)
+    is_superuser = Column(Boolean, default=False)
+
+    created_at = Column(DateTime(timezone=True), onupdate=func.now(), default=func.now())
+
+
