@@ -6,14 +6,6 @@ from models.users import User
 class UserRepository:
 
     @staticmethod
-    async def get_email(session: AsyncSession, email: str) -> User | None:
-
-        result = await session.execute(
-            select(User).where(User.email == email)
-        )
-        return result.scalar_one_or_none()
-    
-    @staticmethod
     async def create(session: AsyncSession, user_schema) -> User:
 
         new_user = User(
@@ -27,3 +19,26 @@ class UserRepository:
         await session.commit()
         await session.refresh(new_user)
         return new_user
+    
+    @staticmethod
+    async def get_email(session: AsyncSession, email: str) -> User | None:
+
+        result = await session.execute(
+            select(User).where(User.email == email)
+        )
+        return result.scalar_one_or_none()
+    
+    @staticmethod
+    async def get_username(session: AsyncSession, username: str) -> User | None:
+
+        result = await session.execute(
+            select(User).where(User.username == username)
+        )
+        return result.scalar_one_or_none()
+    
+    @staticmethod
+    async def get_id(session: AsyncSession, user_id: int) -> User | None:
+        result = await session.execute(
+            select(User).where(User.id == user_id)
+        )
+        return result.scalar_one_or_none()

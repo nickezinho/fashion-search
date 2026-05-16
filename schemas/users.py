@@ -22,3 +22,9 @@ class UserResponse(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
+
+class LoginSchema(BaseModel):
+    username: str
+    password: str
+
+    model_config = ConfigDict(from_attributes=True)
