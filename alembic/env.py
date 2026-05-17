@@ -6,6 +6,7 @@ from alembic import context
 from core.config import DATABASE_URL
 from core.database import Base
 import models.users  # garante que o model entra no metadata
+import models.outfits  # garante que o model entra no metadata
 
 # Alembic config
 config = context.config
